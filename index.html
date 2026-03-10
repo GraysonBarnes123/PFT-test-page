@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Profile Page</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #top-bar {
+            background-color: white;
+            height: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #profile {
+            cursor: pointer;
+            font-size: 24px;
+            user-select: none;
+        }
+        #dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-width: 100px;
+            position: relative;
+        }
+        #settings-dropdown {
+            display: none;
+            position: absolute;
+            top: 100px;
+            right: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-width: 100px;
+        }
+        #dropdown button {
+            display: block;
+            width: 10%;
+            padding: 8px;
+            border: none;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #dropdown button:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div id="top-bar">
+        <div id="profile" onclick="toggleDropdown()">👤</div>
+    </div>
+    <div id="dropdown">
+        <button onclick="toggleSettings()">Settings</button>
+        <button onclick="alert('Profile')">Profile</button>
+        <button onclick="alert('Logout')">Logout</button>
+    </div>
+    <div id="settings-dropdown">
+        <button onclick="alert('Notifications')">Notifications</button>
+        <button onclick="alert('Privacy')">Privacy</button>
+        <button onclick="alert('Billing')">Billing</button>
+        <button onclick="alert('Help/Support')">Help/Support</button>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdown');
+            const settingsDropdown = document.getElementById('settings-dropdown');
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+                settingsDropdown.style.display = 'none';
+            } else {
+                dropdown.style.display = 'block';
+            }
+        }
+
+        function toggleSettings() {
+            const settingsDropdown = document.getElementById('settings-dropdown');
+            settingsDropdown.style.display = settingsDropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Close dropdowns when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('#profile') && !event.target.closest('#dropdown') && !event.target.closest('#settings-dropdown')) {
+                const dropdown = document.getElementById('dropdown');
+                const settingsDropdown = document.getElementById('settings-dropdown');
+                if (dropdown.style.display === 'block') {
+                    dropdown.style.display = 'none';
+                }
+                if (settingsDropdown.style.display === 'block') {
+                    settingsDropdown.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
