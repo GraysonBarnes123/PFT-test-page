@@ -126,6 +126,91 @@
             margin: 0;
         }
 
+        .field-group {
+            margin-bottom: 18px;
+        }
+
+        .field-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #f1f1f1;
+            font-size: 0.95rem;
+        }
+
+        .field-group input,
+        .field-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background: #0f0f0f;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .button,
+        .secondary-button {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 18px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .button {
+            background: #A78BFA;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #555;
+        }
+
+        .button:hover,
+        .secondary-button:hover {
+            transform: translateY(-1px);
+            background: #8a6fe0;
+        }
+
+        .language-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .language-btn {
+            border: 1px solid #555;
+            background: #0f0f0f;
+            color: #fff;
+            border-radius: 999px;
+            padding: 10px 16px;
+            cursor: pointer;
+        }
+
+        .language-btn.active,
+        .language-btn:hover {
+            background: #A78BFA;
+            border-color: #A78BFA;
+            color: #000;
+        }
+
+        .inline-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .status-text {
+            margin-top: 6px;
+            color: #d0d0d0;
+            font-size: 0.95rem;
+        }
+
         #logout h2 {
             color: #ffb3b3;
         }
@@ -178,11 +263,61 @@
                 <section id="profile">
                     <h2>Profile</h2>
                     <p>View and update your account details, profile photo, and contact information.</p>
+                    <div class="profile-form">
+                        <div class="field-group">
+                            <label for="full-name">Full Name</label>
+                            <input id="full-name" type="text" placeholder="Jane Doe" value="Jane Doe">
+                        </div>
+                        <div class="field-group">
+                            <label for="email-address">Email Address</label>
+                            <input id="email-address" type="email" placeholder="jane.doe@example.com" value="jane.doe@example.com">
+                        </div>
+                        <div class="field-group">
+                            <label for="phone-number">Phone Number</label>
+                            <input id="phone-number" type="tel" placeholder="+1 555 123 4567" value="+1 555 123 4567">
+                        </div>
+                        <button class="button" type="button" id="save-profile-btn">Save profile</button>
+                        <p class="status-text" id="profile-save-status">Your profile information is ready to be updated.</p>
+                    </div>
                 </section>
 
                 <section id="settings">
                     <h2>Settings</h2>
                     <p>Manage your general account settings and how your profile works across the app.</p>
+                    <div class="settings-panel">
+                        <div class="field-group">
+                            <button class="button" type="button" id="change-password-btn">Change password</button>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="twofa-phone">2FA phone number</label>
+                            <input id="twofa-phone" type="tel" placeholder="Add phone number for 2FA" value="+1 555 987 6543">
+                        </div>
+                        <div class="inline-actions">
+                            <button class="secondary-button" type="button" id="toggle-2fa-btn">Enable 2FA</button>
+                            <span class="status-text" id="twofa-status">Two-factor authentication is currently off.</span>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Language</label>
+                            <div class="language-buttons" id="language-buttons">
+                                <button class="language-btn active" type="button" data-lang="en">English</button>
+                                <button class="language-btn" type="button" data-lang="es">Español</button>
+                                <button class="language-btn" type="button" data-lang="fr">Français</button>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="currency-select">Currency</label>
+                            <select id="currency-select">
+                                <option value="USD">USD - $</option>
+                                <option value="EUR">EUR - €</option>
+                                <option value="GBP">GBP - £</option>
+                                <option value="JPY">JPY - ¥</option>
+                            </select>
+                        </div>
+                        <p class="status-text" id="currency-status">Selected currency: USD</p>
+                    </div>
                 </section>
 
                 <section id="notifications">
@@ -217,5 +352,188 @@
             </main>
         </div>
     </div>
+
+    <script>
+        const translations = {
+            en: {
+                pageTitle: 'Profile Menu',
+                profileTitle: 'Profile',
+                profileDescription: 'View and update your account details, profile photo, and contact information.',
+                settingsTitle: 'Settings',
+                settingsDescription: 'Manage your general account settings and how your profile works across the app.',
+                notificationsTitle: 'Notifications',
+                notificationsDescription: 'Choose which updates you want to receive and how often you want to hear from the app.',
+                privacyTitle: 'Privacy',
+                privacyDescription: 'Control your privacy options, visibility settings, and account security preferences.',
+                billingTitle: 'Billing',
+                billingDescription: 'Review payment methods, invoices, plan details, and subscription information.',
+                supportTitle: 'Help / Support',
+                supportDescription: 'Find FAQs, troubleshooting help, and ways to contact support if you need assistance.',
+                preferencesTitle: 'App Preferences',
+                preferencesDescription: 'Set your display, accessibility, and app behavior preferences in one place.',
+                logoutTitle: 'Logout',
+                logoutDescription: 'When you\'re done, this is where a sign-out action or confirmation can live.',
+                jumpTo: 'Jump to',
+                navProfile: 'Profile',
+                navSettings: 'Settings',
+                navNotifications: 'Notifications',
+                navPrivacy: 'Privacy',
+                navBilling: 'Billing',
+                navSupport: 'Help & Support',
+                navPreferences: 'App Preferences',
+                navLogout: 'Logout'
+            },
+            es: {
+                pageTitle: 'Menú de perfil',
+                profileTitle: 'Perfil',
+                profileDescription: 'Ver y actualizar los detalles de tu cuenta, foto de perfil e información de contacto.',
+                settingsTitle: 'Configuración',
+                settingsDescription: 'Gestiona la configuración general de tu cuenta y cómo funciona tu perfil en la app.',
+                notificationsTitle: 'Notificaciones',
+                notificationsDescription: 'Elige qué actualizaciones quieres recibir y con qué frecuencia.',
+                privacyTitle: 'Privacidad',
+                privacyDescription: 'Controla tus opciones de privacidad, configuración de visibilidad y seguridad de la cuenta.',
+                billingTitle: 'Facturación',
+                billingDescription: 'Revisa métodos de pago, facturas, detalles del plan e información de suscripción.',
+                supportTitle: 'Ayuda / Soporte',
+                supportDescription: 'Encuentra preguntas frecuentes, ayuda de solución de problemas y cómo contactar con soporte.',
+                preferencesTitle: 'Preferencias de la app',
+                preferencesDescription: 'Configura tus preferencias de visualización, accesibilidad y comportamiento de la app.',
+                logoutTitle: 'Cerrar sesión',
+                logoutDescription: 'Cuando termines, aquí puedes encontrar la acción o confirmación de cierre de sesión.',
+                jumpTo: 'Ir a',
+                navProfile: 'Perfil',
+                navSettings: 'Configuración',
+                navNotifications: 'Notificaciones',
+                navPrivacy: 'Privacidad',
+                navBilling: 'Facturación',
+                navSupport: 'Ayuda & Soporte',
+                navPreferences: 'Preferencias',
+                navLogout: 'Cerrar sesión'
+            },
+            fr: {
+                pageTitle: 'Menu de profil',
+                profileTitle: 'Profil',
+                profileDescription: 'Voir et mettre à jour les détails du compte, la photo de profil et les informations de contact.',
+                settingsTitle: 'Paramètres',
+                settingsDescription: 'Gérez vos paramètres de compte généraux et le fonctionnement de votre profil dans l’application.',
+                notificationsTitle: 'Notifications',
+                notificationsDescription: 'Choisissez quelles mises à jour vous souhaitez recevoir et à quelle fréquence.',
+                privacyTitle: 'Confidentialité',
+                privacyDescription: 'Contrôlez vos options de confidentialité, la visibilité et les préférences de sécurité.',
+                billingTitle: 'Facturation',
+                billingDescription: 'Consultez les modes de paiement, factures, détails du plan et informations d’abonnement.',
+                supportTitle: 'Aide / Support',
+                supportDescription: 'Trouvez des FAQ, de l’aide pour résoudre les problèmes et comment contacter le support.',
+                preferencesTitle: 'Préférences de l’app',
+                preferencesDescription: 'Définissez vos préférences d’affichage, d’accessibilité et de comportement de l’application.',
+                logoutTitle: 'Déconnexion',
+                logoutDescription: 'Lorsque vous avez terminé, c’est ici que se trouve l’action ou la confirmation de déconnexion.',
+                jumpTo: 'Aller à',
+                navProfile: 'Profil',
+                navSettings: 'Paramètres',
+                navNotifications: 'Notifications',
+                navPrivacy: 'Confidentialité',
+                navBilling: 'Facturation',
+                navSupport: 'Aide & Support',
+                navPreferences: 'Préférences',
+                navLogout: 'Déconnexion'
+            }
+        };
+
+        const languageButtons = document.querySelectorAll('.language-btn');
+        const navLinks = document.querySelectorAll('.sidebar nav a');
+        const pageTitle = document.querySelector('.content h1');
+        const sectionTitles = {
+            profile: document.querySelector('#profile h2'),
+            settings: document.querySelector('#settings h2'),
+            notifications: document.querySelector('#notifications h2'),
+            privacy: document.querySelector('#privacy h2'),
+            billing: document.querySelector('#billing h2'),
+            support: document.querySelector('#support h2'),
+            preferences: document.querySelector('#preferences h2'),
+            logout: document.querySelector('#logout h2')
+        };
+        const sectionDescriptions = {
+            profile: document.querySelector('#profile p'),
+            settings: document.querySelector('#settings p'),
+            notifications: document.querySelector('#notifications p'),
+            privacy: document.querySelector('#privacy p'),
+            billing: document.querySelector('#billing p'),
+            support: document.querySelector('#support p'),
+            preferences: document.querySelector('#preferences p'),
+            logout: document.querySelector('#logout p')
+        };
+        const jumpTitle = document.querySelector('.sidebar h2');
+        const currencySelect = document.getElementById('currency-select');
+        const currencyStatus = document.getElementById('currency-status');
+        const twofaStatus = document.getElementById('twofa-status');
+        const toggle2faBtn = document.getElementById('toggle-2fa-btn');
+        const saveProfileBtn = document.getElementById('save-profile-btn');
+        const profileSaveStatus = document.getElementById('profile-save-status');
+        const changePasswordBtn = document.getElementById('change-password-btn');
+
+        function setLanguage(lang) {
+            const translation = translations[lang] || translations.en;
+            pageTitle.textContent = translation.pageTitle;
+            jumpTitle.textContent = translation.jumpTo;
+
+            navLinks[0].textContent = translation.navProfile;
+            navLinks[1].textContent = translation.navSettings;
+            navLinks[2].textContent = translation.navNotifications;
+            navLinks[3].textContent = translation.navPrivacy;
+            navLinks[4].textContent = translation.navBilling;
+            navLinks[5].textContent = translation.navSupport;
+            navLinks[6].textContent = translation.navPreferences;
+            navLinks[7].textContent = translation.navLogout;
+
+            sectionTitles.profile.textContent = translation.profileTitle;
+            sectionDescriptions.profile.textContent = translation.profileDescription;
+            sectionTitles.settings.textContent = translation.settingsTitle;
+            sectionDescriptions.settings.textContent = translation.settingsDescription;
+            sectionTitles.notifications.textContent = translation.notificationsTitle;
+            sectionDescriptions.notifications.textContent = translation.notificationsDescription;
+            sectionTitles.privacy.textContent = translation.privacyTitle;
+            sectionDescriptions.privacy.textContent = translation.privacyDescription;
+            sectionTitles.billing.textContent = translation.billingTitle;
+            sectionDescriptions.billing.textContent = translation.billingDescription;
+            sectionTitles.support.textContent = translation.supportTitle;
+            sectionDescriptions.support.textContent = translation.supportDescription;
+            sectionTitles.preferences.textContent = translation.preferencesTitle;
+            sectionDescriptions.preferences.textContent = translation.preferencesDescription;
+            sectionTitles.logout.textContent = translation.logoutTitle;
+            sectionDescriptions.logout.textContent = translation.logoutDescription;
+
+            languageButtons.forEach(button => {
+                button.classList.toggle('active', button.dataset.lang === lang);
+            });
+        }
+
+        languageButtons.forEach(button => {
+            button.addEventListener('click', () => setLanguage(button.dataset.lang));
+        });
+
+        currencySelect.addEventListener('change', () => {
+            currencyStatus.textContent = `Selected currency: ${currencySelect.value}`;
+        });
+
+        toggle2faBtn.addEventListener('click', () => {
+            const enabled = toggle2faBtn.textContent.includes('Enable');
+            toggle2faBtn.textContent = enabled ? 'Disable 2FA' : 'Enable 2FA';
+            twofaStatus.textContent = enabled ? 'Two-factor authentication is enabled.' : 'Two-factor authentication is currently off.';
+        });
+
+        saveProfileBtn.addEventListener('click', () => {
+            profileSaveStatus.textContent = 'Profile saved successfully.';
+            profileSaveStatus.style.color = '#8bf28b';
+        });
+
+        changePasswordBtn.addEventListener('click', () => {
+            alert('Password change flow would open here.');
+        });
+
+        setLanguage('en');
+    </script>
 </body>
+</html>
 </html>
